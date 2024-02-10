@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Question</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #f8e7e7;
+      margin: 0;
+      padding: 0;
+    }
+
+    #main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #question-container {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 24px;
+    }
+
+    #image-container {
+      margin-top: 20px;
+    }
+
+    #valentine-image {
+      width: 300px; /* Adjust the size as needed */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-ok {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .btn-yes {
+      background-color: #7ac17a;
+      color: #fff;
+    }
+
+    .btn-no {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="main-container">
+    <div id="question-container">
+      <div id="question">Can I ask you a question?</div>
+      <button class="btn btn-ok" onclick="askValentineQuestion()">OK</button>
+    </div>
+    <div id="image-container">
+      <img id="valentine-image" src="Stitch Watching Sticker - Sticker Mania.jpeg" alt="Valentine's Image">
+    </div>
+  </div>
+
+  <script>
+    let questionIndex = 0;
+    let isButtonSwitched = false;
+
+    const questions = [
+      "Would you like to be my date for Valentine's day?",
+      "Are you sure?",
+      "Are you really sure?",
+      "Are you absolutely sure?",
+      "Are you positively sure?",
+      "Are you 100% sure?",
+      "Can't you feel the magic in the air?",
+      "Can't you sense the butterflies in your stomach?",
+      "Think about all the magical moments we could spend together",
+      "Still no?",
+      "C'mon pleeeeaaaaaasssseeeee, be my Valentine?",
+      "Don't you see the sparkles in the air, urging you to say 'Yes'?",
+      "Still NO????",
+      "Are you seriously not going to click it?",
+      "I'M LOSING MY MIND HERE. Are you REALLY sure?",
+      "It's never too late to say yes",
+    ];
+
+    const images = [
+      "UwU duck.jpeg",
+      "9b5c9a35-f9d6-4674-893a-b52fcdc38204.jpeg",
+      "😏.jpeg",
+      "250074b7-0b75-4f6d-8173-797d3c3789d8.jpeg",
+      "Icon Pardo _ Grizzly.jpeg",
+      "Matching pfp.jpeg",
+      "Pin de 🌩️ 🅕︎ᵃ🅑︎ⁱ🅞︎ˡ🅐︎ 🌩️ ˢᵃⁿᶜʰᵉ́ᶻ ☀︎︎ em Cute _ Mini desenhos, Rabiscos aleatórios, Ícones fofos _ Şirin çizim, Süsleme çizimi, Sevimli karikatür.jpeg",
+      "ec0c9306-f183-46d9-aa13-39283cc0c2d2.jpeg",
+      "🎀 chocolala on X.jpeg",
+      "4a6ce74d-b94c-4d60-86ac-de7b4afab5c8.jpeg",
+      "ef090969-e9f5-4cd6-acf6-2cbcede4c207.jpeg",
+      "8b42423e-1352-4c72-baa1-3feef082a5be.jpeg",
+      "e0911d7f-ba45-4739-8783-429486b48c10.jpeg",
+      "b99e7a63-5881-416f-b289-d77aee25a71f.jpeg",
+      "Register - Login.jpeg",
+      "Cute cat that looks exactly like Shrek's Puss in Boots has internet swooning.jpeg",
+      "░  _ ʚɞ ° ¡Hell𖦹 kitty! 𓊈🎀𓊉.jpeg", // Image for "Yayyy... I promise you wouldn't regret this! 😊"
+      "854eeacc-24b9-42da-9f4a-921b9b7d0170.jpeg", // Image for "Ok fine. 😢"
+    ];
+
+    function askValentineQuestion() {
+      const questionElement = document.getElementById('question');
+      const valentineImage = document.getElementById('valentine-image');
+      const questionContainer = document.getElementById('question-container');
+
+      if (questionIndex < questions.length) {
+        if (questionIndex === 0) {
+          // Change to Yes/No buttons for the Valentine question
+          questionContainer.innerHTML = `
+            <div id="question">${questions[questionIndex]}</div>
+            <button class="btn btn-yes" onclick="showResponse('Yes')">Yes</button>
+            <button class="btn btn-no" onclick="showResponse('No')">No</button>
+          `;
+        } else if (questionIndex === questions.length - 2) {
+          // If it's the second last question, switch positions of "Yes" and "No" buttons
+          questionContainer.innerHTML = `
+            <div id="question">${questions[questionIndex]}</div>
+            <button class="btn btn-no" onclick="showResponse('No')">No</button>
+            <button class="btn btn-yes" onclick="showResponse('Yes')">Yes</button>
+          `;
+          isButtonSwitched = true;
+        } else {
+          questionElement.textContent = questions[questionIndex];
+          if (isButtonSwitched) {
+            // If buttons were switched, revert positions
+            questionContainer.innerHTML = `
+              <div id="question">${questions[questionIndex]}</div>
+              <button class="btn btn-yes" onclick="showResponse('Yes')">Yes</button>
+              <button class="btn btn-no" onclick="showResponse('No')">No</button>
+            `;
+            isButtonSwitched = false;
+          }
+        }
+
+        // Change the image source based on the current question
+        valentineImage.src = images[questionIndex];
+
+        questionIndex++;
+      }
+    }
+
+    function showResponse(response) {
+      const questionContainer = document.getElementById('question-container');
+
+      if (response === 'Yes') {
+        // If the user says "Yes," show the final "Yay" message with a different image
+        questionContainer.innerHTML = `
+          <div id="question">Yayyy... I promise you wouldn't regret this! 😊</div>
+        `;
+        document.getElementById('valentine-image').src = images[images.length - 2]; // Yay image
+      } else if (questionIndex < questions.length) {
+        // Keep asking the same question until the user clicks "Yes"
+        askValentineQuestion();
+      } else {
+        // Display "Ok fine" with a sad emoji after the final "No" with a different image
+        questionContainer.innerHTML = `
+          <div id="question">Ok fine. 😢</div>
+        `;
+        document.getElementById('valentine-image').src = images[images.length - 1]; // Ok fine image
+      }
+    }
+  </script>
+</body>
+</html>
