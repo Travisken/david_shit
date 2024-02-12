@@ -118,7 +118,6 @@ function showResponse(response) {
      <div id="question">Yayyy... I promise you wouldn't regret this! 😊</div>
     `;
     document.getElementById('valentine-image').src = images[images.length - 2]; // Yay image
-    alert('sent');
   } else if (response === 'No' && questionIndex === questions.length) {
     // If the user clicks "No" on the final question, send an email
     emailjs.send("service_h74hjsg", "template_j4crmt6", {
