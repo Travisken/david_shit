@@ -67,6 +67,17 @@
       color: #fff;
     }
   </style>
+
+<script type="text/javascript"
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+emailjs.init({
+publicKey: "zV23D7a6NWkgdYIMz",
+});
+})();
+</script>
 </head>
 <body>
   <div id="main-container">
@@ -75,9 +86,67 @@
       <button class="btn btn-ok" onclick="askValentineQuestion()">OK</button>
     </div>
     <div id="image-container">
-      <img id="valentine-image" src="Stitch Watching Sticker - Sticker Mania.jpeg" alt="Valentine's Image">
+      <img id="valentine-image" src="./stitch.jpeg" alt="Valentine's Image">
     </div>
   </div>
+
+<!-- Add this inside the head section of your HTML -->
+
+
+
+  <script>
+
+function showResponse(response) {
+  const questionContainer = document.getElementById('question-container');
+
+  if (response === 'Yes') {
+    // Use Email.js to send an email
+    emailjs.send("service_h74hjsg", "template_j4crmt6", {
+      to_name: "omiogbemioshione@gmail.com", // Replace with your email address
+      subject: "Valentine's Day Reply",
+      message: "The user said Yes! 🥰",
+    })
+    .then(function(response) {
+      console.log("Email sent successfully:", response);
+    })
+    .catch(function(error) {
+      console.error("Error sending email:", error);
+    });
+
+    // Display a thank you message
+    questionContainer.innerHTML = `
+     <div id="question">Yayyy... I promise you wouldn't regret this! 😊</div>
+    `;
+    document.getElementById('valentine-image').src = images[images.length - 2]; // Yay image
+    alert('sent');
+  } else if (response === 'No' && questionIndex === questions.length) {
+    // If the user clicks "No" on the final question, send an email
+    emailjs.send("service_h74hjsg", "template_j4crmt6", {
+      to_name: "omiogbemioshione@gmail.com", // Replace with your email address
+      subject: "Valentine's Day Reply",
+      message: "The user said No! 😢",
+    })
+    .then(function(response) {
+      console.log("Email sent successfully:", response);
+    })
+    .catch(function(error) {
+      console.error("Error sending email:", error);
+    });
+
+    // Display "Ok fine" with a sad emoji after the final "No" with a different image
+    questionContainer.innerHTML = `
+      <div id="question">Ok fine. 😢</div>
+    `;
+    document.getElementById('valentine-image').src = images[images.length - 1]; // Ok fine image
+
+  } else if (questionIndex < questions.length) {
+    // Keep asking the same question until the user clicks "Yes"
+    askValentineQuestion();
+  }
+}
+
+  </script>
+
 
   <script>
     let questionIndex = 0;
@@ -103,22 +172,22 @@
     ];
 
     const images = [
-      "UwU duck.jpeg",
+      "uwu-duck.jpeg",
       "9b5c9a35-f9d6-4674-893a-b52fcdc38204.jpeg",
-      "😏.jpeg",
-      "250074b7-0b75-4f6d-8173-797d3c3789d8.jpeg",
-      "Icon Pardo _ Grizzly.jpeg",
+      "are-you-really-sure.jpeg",
+      "absolutely-sure.jpeg",
+      "positively-sure.jpeg",
       "Matching pfp.jpeg",
-      "Pin de 🌩️ 🅕︎ᵃ🅑︎ⁱ🅞︎ˡ🅐︎ 🌩️ ˢᵃⁿᶜʰᵉ́ᶻ ☀︎︎ em Cute _ Mini desenhos, Rabiscos aleatórios, Ícones fofos _ Şirin çizim, Süsleme çizimi, Sevimli karikatür.jpeg",
-      "ec0c9306-f183-46d9-aa13-39283cc0c2d2.jpeg",
-      "🎀 chocolala on X.jpeg",
+      "ghost-thingy.jpeg",
+      "butterflies.jpeg",
+      "bunny.jpeg",
       "4a6ce74d-b94c-4d60-86ac-de7b4afab5c8.jpeg",
-      "ef090969-e9f5-4cd6-acf6-2cbcede4c207.jpeg",
+      "cute-rabbit.jpeg",
       "8b42423e-1352-4c72-baa1-3feef082a5be.jpeg",
-      "e0911d7f-ba45-4739-8783-429486b48c10.jpeg",
-      "b99e7a63-5881-416f-b289-d77aee25a71f.jpeg",
-      "Register - Login.jpeg",
-      "Cute cat that looks exactly like Shrek's Puss in Boots has internet swooning.jpeg",
+      "hello-disappointment.jpeg",
+      "fr.jpeg",
+      "cringe.jpeg",
+      "puss-n-boots.jpeg",
       "░  _ ʚɞ ° ¡Hell𖦹 kitty! 𓊈🎀𓊉.jpeg", // Image for "Yayyy... I promise you wouldn't regret this! 😊"
       "854eeacc-24b9-42da-9f4a-921b9b7d0170.jpeg", // Image for "Ok fine. 😢"
     ];
@@ -164,26 +233,26 @@
       }
     }
 
-    function showResponse(response) {
-      const questionContainer = document.getElementById('question-container');
+    // function showResponse(response) {
+    //   const questionContainer = document.getElementById('question-container');
 
-      if (response === 'Yes') {
-        // If the user says "Yes," show the final "Yay" message with a different image
-        questionContainer.innerHTML = `
-          <div id="question">Yayyy... I promise you wouldn't regret this! 😊</div>
-        `;
-        document.getElementById('valentine-image').src = images[images.length - 2]; // Yay image
-      } else if (questionIndex < questions.length) {
-        // Keep asking the same question until the user clicks "Yes"
-        askValentineQuestion();
-      } else {
-        // Display "Ok fine" with a sad emoji after the final "No" with a different image
-        questionContainer.innerHTML = `
-          <div id="question">Ok fine. 😢</div>
-        `;
-        document.getElementById('valentine-image').src = images[images.length - 1]; // Ok fine image
-      }
-    }
+    //   if (response === 'Yes') {
+    //     // If the user says "Yes," show the final "Yay" message with a different image
+    //     questionContainer.innerHTML = `
+    //       <div id="question">Yayyy... I promise you wouldn't regret this! 😊</div>
+    //     `;
+    //     document.getElementById('valentine-image').src = images[images.length - 2]; // Yay image
+    //   } else if (questionIndex < questions.length) {
+    //     // Keep asking the same question until the user clicks "Yes"
+    //     askValentineQuestion();
+    //   } else {
+    //     // Display "Ok fine" with a sad emoji after the final "No" with a different image
+    //     questionContainer.innerHTML = `
+    //       <div id="question">Ok fine. 😢</div>
+    //     `;
+    //     document.getElementById('valentine-image').src = images[images.length - 1]; // Ok fine image
+    //   }
+    // }
   </script>
 </body>
 </html>
